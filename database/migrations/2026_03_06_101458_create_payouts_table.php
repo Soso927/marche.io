@@ -13,9 +13,15 @@ return new class extends Migration
     {
         Schema::create('payouts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('shop_id')->constrained()->onDelete('cascade');
+            $table->decimal('amount', 10, 2);
+            $table->enum('status',['pending','processing','completed','failed'])->default('pending');
+            $table->string('stripe_transfer_id')->nullable();
             $table->timestamps();
         });
     }
+
+    
 
     /**
      * Reverse the migrations.
