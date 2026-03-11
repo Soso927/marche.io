@@ -66,4 +66,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // La boutique du vendeur
+    public function shop()
+    {
+        return $this->hasOne(Shop::class);
+    }
+
+    // Les commandes passées en tant qu'acheteur
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'buyer_id');
+    }
+
+    // Les avis laissés par l'utilisateur
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
