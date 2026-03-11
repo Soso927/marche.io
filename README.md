@@ -1,59 +1,233 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛒 marche.io — Marketplace Multi-Vendeurs
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Projet réalisé dans le cadre du titre **DWWM (Développeur Web et Web Mobile)**
+> Framework : Laravel 12 | Base de données : MySQL | Paiement : Stripe
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Présentation du projet
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**marche.io** est une marketplace multi-vendeurs développée avec Laravel 12. La plateforme permet à des vendeurs d'ouvrir leur boutique en ligne, de gérer leur catalogue de produits et de recevoir des paiements — le tout supervisé par un administrateur.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Fonctionnalités prévues
 
-## Learning Laravel
+- Authentification complète (inscription, connexion, profil, 2FA)
+- Gestion des rôles : **Admin**, **Vendeur**, **Acheteur**
+- Gestion des boutiques et des produits (CRUD complet)
+- Système de panier et de commandes
+- Paiement en ligne via **Stripe**
+- Génération de factures PDF
+- Espace d'administration (validation boutiques, modération, statistiques)
+- API REST sécurisée avec Laravel Sanctum
+- Interface responsive Mobile-first avec Tailwind CSS
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ Stack technique
 
-## Laravel Sponsors
+| Technologie | Usage |
+|---|---|
+| **PHP 8.2+** | Langage principal |
+| **Laravel 12** | Framework PHP |
+| **MySQL** | Base de données relationnelle |
+| **Jetstream + Livewire** | Authentification et composants dynamiques |
+| **Spatie/Laravel-Permission** | Gestion des rôles et permissions |
+| **Stripe** | Paiement en ligne et virements vendeurs |
+| **Laravel DomPDF** | Génération de factures PDF |
+| **Intervention Image** | Redimensionnement des images produits |
+| **Laravel Telescope** | Debug et monitoring (développement) |
+| **Tailwind CSS** | Framework CSS responsive |
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## ⚙️ Prérequis
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Avant d'installer le projet, assure-toi d'avoir :
 
-## Contributing
+- PHP >= 8.2
+- Composer
+- Node.js >= 18 et npm
+- MySQL
+- Laragon (Windows) ou équivalent
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🚀 Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1. Cloner le dépôt
 
-## Security Vulnerabilities
+```bash
+git clone https://github.com/TON_USERNAME/marche.io.git
+cd marche.io
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 2. Installer les dépendances PHP
 
-## License
+```bash
+composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Installer les dépendances JavaScript
+
+```bash
+npm install
+npm run dev
+```
+
+### 4. Configurer l'environnement
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Édite le fichier `.env` avec tes informations :
+
+```env
+DB_DATABASE=marche_io
+DB_USERNAME=root
+DB_PASSWORD=ton_mot_de_passe
+
+STRIPE_KEY=pk_test_...
+STRIPE_SECRET=sk_test_...
+```
+
+### 5. Créer la base de données
+
+```bash
+mysql -u root -p
+CREATE DATABASE marche_io CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+exit;
+```
+
+### 6. Exécuter les migrations et les seeders
+
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+### 7. Lancer le serveur
+
+```bash
+php artisan serve
+```
+
+L'application est accessible sur `http://127.0.0.1:8000`
+
+---
+
+## 👤 Comptes de test
+
+| Rôle | Email | Mot de passe |
+|---|---|---|
+| **Admin** | admin@marche.io | password |
+| **Vendeur** | seller@marche.io | password |
+| **Acheteur** | buyer@marche.io | password |
+
+---
+
+## 🗄️ Structure de la base de données
+
+### Tables créées
+
+| Table | Description |
+|---|---|
+| `users` | Utilisateurs de la plateforme |
+| `shops` | Boutiques des vendeurs |
+| `categories` | Catégories de produits (avec auto-référence parent/enfant) |
+| `products` | Produits mis en vente |
+| `orders` | Commandes passées par les acheteurs |
+| `order_items` | Lignes de commande |
+| `reviews` | Avis produits avec modération |
+| `payouts` | Virements vendeurs via Stripe |
+
+### Relations principales
+
+- Un `User` peut posséder une `Shop` (vendeur)
+- Une `Shop` possède plusieurs `Products`
+- Une `Category` peut avoir des sous-catégories (auto-référence)
+- Un `Order` contient plusieurs `OrderItems`
+- Un `OrderItem` conserve le prix unitaire au moment de la commande
+- Un `Review` n'est visible que s'il est approuvé par l'admin
+- Un `Payout` représente un virement Stripe vers un vendeur
+
+---
+
+## 🔐 Gestion des rôles
+
+La gestion des rôles est assurée par le package **Spatie/Laravel-Permission**.
+
+| Rôle | Accès |
+|---|---|
+| **admin** | Back-office complet, validation boutiques, modération |
+| **seller** | Gestion de sa boutique et ses produits |
+| **buyer** | Navigation, commandes, avis |
+
+Les routes sont protégées par middleware :
+
+```php
+Route::middleware(['auth', 'role:seller'])->prefix('seller')-> ...
+Route::middleware(['auth', 'role:admin'])->prefix('admin')-> ...
+```
+
+---
+
+## 📁 Architecture du projet
+
+```
+marche.io/
+├── app/
+│   ├── Models/
+│   │   ├── User.php
+│   │   ├── Shop.php
+│   │   ├── Category.php
+│   │   ├── Product.php
+│   │   ├── Order.php
+│   │   ├── OrderItem.php
+│   │   ├── Review.php
+│   │   └── Payout.php
+├── database/
+│   ├── migrations/
+│   └── seeders/
+│       ├── RoleSeeder.php
+│       └── UserSeeder.php
+├── resources/
+│   └── views/
+│       ├── admin/
+│       ├── seller/
+│       └── buyer/
+└── routes/
+    ├── web.php
+    └── api.php
+```
+
+---
+
+## 📅 Planning de développement
+
+| Semaine | Phase | Contenu |
+|---|---|---|
+| **1-2** | Phase 1 + 2 | ✅ Installation, BDD, modèles, seeders |
+| **3-4** | Phase 3 + 4.1-4.3 | Auth, rôles, boutique, produits, panier |
+| **5-6** | Phase 4.4-4.6 | Commandes, Stripe, back-office admin |
+| **7** | Phase 5 | API REST avec Sanctum et Resources |
+| **8-9** | Phase 6 | Frontend, Tailwind, Livewire, responsive |
+| **10** | Phase 7 + 8 | Tests, sécurité, déploiement, README |
+
+---
+
+## 🔒 Sécurité
+
+- Protection **CSRF** sur tous les formulaires
+- **Form Requests** pour la validation des données
+- **Policies Laravel** pour l'autorisation fine
+- Variables sensibles dans `.env` (jamais dans le code)
+- `.env` et `storage/` ajoutés au `.gitignore`
+- Échappement des données dans les vues Blade `{{ $var }}`
+
+---
+
+## 📄 Licence
+
+Projet réalisé à des fins pédagogiques dans le cadre du titre DWWM.
