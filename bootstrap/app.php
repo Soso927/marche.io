@@ -13,8 +13,16 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         // Alias middleware pour protéger les routes réservées aux administrateurs.
-        $middleware->alias([
-            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+     // On dit à Laravel : quand tu vois 'role' dans une route,
+    // utilise la classe RoleMiddleware de Spatie
+    $middleware->alias([
+        'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+
+        // On en profite pour enregistrer aussi 'permission' et 'role_or_permission'
+        // qui sont les deux autres middlewares fournis par Spatie
+        // Tu en auras besoin plus tard pour des protections plus fines
+        'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

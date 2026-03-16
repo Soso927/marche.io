@@ -27,3 +27,24 @@ Route::middleware([
 ])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 });
+
+// Routes vendeur
+Route::middleware(['auth', 'role:seller'])->prefix('seller')->name('seller.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('seller.dashboard');
+    })->name('dashboard');
+});
+
+// Routes admin
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+});
+
+// Routes acheteur
+Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->name('buyer.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('buyer.dashboard');
+    })->name('dashboard');
+});
