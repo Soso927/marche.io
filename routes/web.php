@@ -28,12 +28,20 @@ Route::middleware([
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 });
 
-// Routes vendeur
-Route::middleware(['auth', 'role:seller'])->prefix('seller')->name('seller.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('seller.dashboard');
-    })->name('dashboard');
-});
+Route::middleware(['auth', 'role:seller'])
+    ->prefix('seller')
+    ->name('seller.')
+    ->group(function () {
+
+        // Dashboard vendeur
+        Route::get('/dashboard', function () {
+            return view('seller.dashboard');
+        })->name('dashboard');
+
+        // Toutes les routes CRUD de la boutique
+        // Génère automatiquement : index, create, store, show, edit, update, destroy
+        Route::resource('shop', \App\Http\Controllers\Seller\ShopController::class);
+    });
 
 // Routes admin
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
