@@ -56,3 +56,4 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->name('buyer.')->grou
         return view('buyer.dashboard');
     })->name('dashboard');
 });
+

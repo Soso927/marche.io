@@ -9,9 +9,13 @@ use App\Models\Shop;
 use Illuminate\Support\Str;
 use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+// on importe le trait qui fournit la méthode authorize() pour les politiques d'accès
+use Illuminate\foundation\Auth\Access\AuthorizesRequests;
 
 class ShopController extends Controller
 {
+    // on branche la boîte à outil d'autorisation sur ce controller
+    use AuthorizesRequests;
     // Affiche la boutique du vendeur connecté
     public function index()
     {
